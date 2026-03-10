@@ -408,23 +408,20 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* Feature image – centered, never cropped */
+    /* Feature image – fills edge-to-edge, no background */
     .feature-img-fill {
+      position: relative;
       overflow: hidden;
-      background: #080808;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
     }
     .feature-img-fill img {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: auto;
-      max-height: 320px;
-      object-fit: contain;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
       display: block;
       cursor: zoom-in;
-      border-radius: 8px;
       transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
     }
     .feature-img-fill img:hover { transform: scale(1.04); }
