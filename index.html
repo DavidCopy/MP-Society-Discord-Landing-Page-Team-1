@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MP Academy — Land Your First Copywriting Client in 45 Days. Free.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#C557FF',
+            surface: '#080808',
+            card: '#0F0F0F',
+          },
+          fontFamily: {
+            display: ['Bebas Neue', 'sans-serif'],
+            body: ['Outfit', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    :root {
+      --accent: #C557FF;
+      --accent-glow: rgba(197, 87, 255, 0.35);
+      --accent-dim: rgba(197, 87, 255, 0.1);
+      --border: rgba(197, 87, 255, 0.15);
+      --text-secondary: #ADADBD;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.35;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.03em;
+      line-height: 1.1;
+    }
+    p {
+      line-height: 1.75;
+      color: var(--text-secondary);
+    }
+    .accent { color: var(--accent); }
+
+    /* Scroll fade-up */
+    .fu {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fu.vis { opacity: 1; transform: none; }
+    .fu.delay-1 { transition-delay: 0.1s; }
+    .fu.delay-2 { transition-delay: 0.2s; }
+    .fu.delay-3 { transition-delay: 0.3s; }
+    .fu.delay-4 { transition-delay: 0.4s; }
+
+    /* CTA Button */
+    .btn-primary {
+      background: linear-gradient(135deg, #C557FF, #9B27E0);
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+      padding: 1rem 2.25rem;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 24px rgba(197,87,255,0.3);
+      transition: box-shadow 0.3s, transform 0.2s cubic-bezier(0.16,1,0.3,1);
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 40px rgba(197,87,255,0.5), 0 4px 32px rgba(197,87,255,0.4);
+      transform: translateY(-2px);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(197,87,255,0.3), transparent);
+    }
+
+    /* Feature card */
+    .feature-card {
+      background: #0F0F0F;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    /* Feature image container */
+    .feature-img-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: #080808;
+      min-height: 280px;
+    }
+    .feature-img-wrap img {
+      max-width: 100%;
+      max-height: 240px;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 4px 28px rgba(0,0,0,0.6);
+      cursor: zoom-in;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s;
+    }
+    .feature-img-wrap img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.8);
+    }
+
+    /* Phase card */
+    .phase-card {
+      background: #0D0D0D;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s, border-color 0.3s;
+      cursor: default;
+    }
+    .phase-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 24px 60px rgba(197,87,255,0.18);
+      border-color: rgba(197,87,255,0.45);
+    }
+    .phase-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    /* Review images */
+    .review-img {
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      cursor: zoom-in;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s;
+    }
+    .review-img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+
+    /* FAQ */
+    .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .faq-btn {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      padding: 1.4rem 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .faq-btn:hover { color: var(--accent); }
+    .faq-icon {
+      width: 24px; height: 24px;
+      flex-shrink: 0;
+      border: 1.5px solid rgba(197,87,255,0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s, border-color 0.3s, background 0.3s;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background: rgba(197,87,255,0.15);
+      border-color: var(--accent);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .faq-item.open .faq-answer { max-height: 400px; }
+    .faq-answer p { padding-bottom: 1.4rem; }
+
+    /* Glow bg */
+    .glow-bg {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+
+    /* Nav */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(0, 0, 0, 0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* Eyebrow */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(197,87,255,0.1);
+      border: 1px solid rgba(197,87,255,0.25);
+      color: var(--accent);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Phase day label */
+    .phase-day {
+      display: block;
+      text-align: center;
+      width: fit-content;
+      margin: 0 auto 1rem;
+      background: rgba(197,87,255,0.1);
+      border: 1px solid rgba(197,87,255,0.25);
+      color: var(--accent);
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 0.5rem 1.5rem;
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+    }
+
+    /* Proof pill */
+    .proof-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 0.5rem 1.1rem;
+      border-radius: 100px;
+    }
+
+    /* Wins grid — 4 columns × 2 rows, all visible */
+    .wins-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+    .wins-strip img {
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      object-position: center;
+      background: #111;
+      padding: 6px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+      cursor: zoom-in;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .wins-strip img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+    }
+
+    /* Bold highlight */
+    .copy-bold {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Stat box */
+    .stat-box {
+      background: rgba(197,87,255,0.07);
+      border: 1px solid rgba(197,87,255,0.2);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+    }
+
+    /* Best case card */
+    .best-case-card {
+      background: #0D0D0D;
+      border: 1px solid rgba(197,87,255,0.3);
+      border-radius: 20px;
+      padding: 1.75rem;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(0,0,0,0.93);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner {
+      position: relative;
+      max-width: 92vw;
+      max-height: 92vh;
+    }
+    .lightbox-inner img {
+      max-width: 92vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border-radius: 10px;
+      cursor: default;
+      display: block;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -42px;
+      right: 0;
+      color: rgba(255,255,255,0.7);
+      font-size: 1.4rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+      padding: 0.25rem 0.5rem;
+      transition: color 0.2s;
+    }
+    .lightbox-close:hover { color: #fff; }
+
+    /* Testimonial marquee */
+    .testimonials-marquee-outer {
+      overflow: hidden;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    }
+    .testimonials-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      animation: scroll-marquee 50s linear infinite;
+    }
+    .testimonials-track-r2 {
+      animation-duration: 64s;
+    }
+    .testimonials-marquee-outer:hover .testimonials-track {
+      animation-play-state: paused;
+    }
+    .testimonials-track img {
+      height: 185px;
+      width: auto;
+      flex-shrink: 0;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+      cursor: zoom-in;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .testimonials-track img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+    }
+    @keyframes scroll-marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Feature image – centered, never cropped */
+    .feature-img-fill {
+      overflow: hidden;
+      background: #080808;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .feature-img-fill img {
+      width: 100%;
+      height: auto;
+      max-height: 320px;
+      object-fit: contain;
+      display: block;
+      cursor: zoom-in;
+      border-radius: 8px;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .feature-img-fill img:hover { transform: scale(1.04); }
+
+    /* Roadmap vertical timeline */
+    .roadmap-timeline {
+      display: flex;
+      flex-direction: column;
+      max-width: 640px;
+      margin: 0 auto 3rem;
+    }
+    .roadmap-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2px 0;
+    }
+    .roadmap-line {
+      width: 2px;
+      height: 20px;
+      background: linear-gradient(180deg, rgba(197,87,255,0.5), rgba(197,87,255,0.15));
+    }
+    .roadmap-arrow {
+      color: var(--accent);
+      font-size: 1.4rem;
+      line-height: 1;
+      margin: 3px 0;
+    }
+
+    /* Payment screenshots stacked */
+    .payment-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+    .payment-stack img {
+      width: 100%;
+      max-width: 340px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      cursor: zoom-in;
+      display: block;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .payment-stack img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <img src="brand_assets/mp society logo + brand colors.png" alt="MP Academy" class="h-9 w-auto">
+      <a href="https://discord.gg/UkFj372Egg" class="btn-primary" style="font-size:0.88rem;padding:0.6rem 1.4rem;">Join Free →</a>
+    </div>
+  </nav>
+
+  <!-- ─────────────────────────────── HERO ─────────────────────────────── -->
+  <section class="relative overflow-hidden pt-20 pb-20">
+    <div class="glow-bg" style="width:900px;height:900px;background:radial-gradient(circle, rgba(197,87,255,0.2) 0%, transparent 68%);top:-280px;left:50%;transform:translateX(-50%);"></div>
+    <div class="glow-bg" style="width:400px;height:400px;background:radial-gradient(circle, rgba(255,60,220,0.1) 0%, transparent 70%);top:80px;right:12%;"></div>
+
+    <div class="max-w-4xl mx-auto px-6 text-center relative">
+      <div class="fu mb-6">
+        <span class="eyebrow">✦ Completely free to join</span>
+      </div>
+      <h1 class="fu delay-1 text-white mb-6" style="font-size:clamp(2rem,4.5vw,3.2rem);">
+        How struggling copywriters are landing their first client in <span class="accent">45 days</span> — without buying $997 courses, inside a free Discord
+      </h1>
+      <p class="fu delay-2 mx-auto mb-10" style="max-width:640px;font-size:1.1rem;line-height:1.8;color:#ADADBD;">
+        A 45-day beginner roadmap. Line-by-line copy reviews. Monthly cash prizes. And a community where people are just a few steps ahead of you. Not $30k/month celebrities.
+      </p>
+      <div class="fu delay-3 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://discord.gg/UkFj372Egg" class="btn-primary" style="font-size:1.05rem;padding:1.1rem 2.5rem;">→ Join MP Academy Free</a>
+      </div>
+      <div class="fu delay-4 mt-8 flex items-center justify-center">
+        <div class="proof-pill">
+          <div class="flex -space-x-2">
+            <div class="w-7 h-7 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 border-2 border-black flex items-center justify-center text-xs font-bold text-white">A</div>
+            <div class="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 border-2 border-black flex items-center justify-center text-xs font-bold text-white">K</div>
+            <div class="w-7 h-7 rounded-full bg-gradient-to-br from-pink-400 to-red-400 border-2 border-black flex items-center justify-center text-xs font-bold text-white">R</div>
+            <div class="w-7 h-7 rounded-full bg-gradient-to-br from-green-400 to-teal-500 border-2 border-black flex items-center justify-center text-xs font-bold text-white">M</div>
+          </div>
+          <span style="color:#ADADBD;font-size:0.9rem;">Join <strong style="color:#fff;">150+</strong> copywriters already inside</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider max-w-5xl mx-auto"></div>
+
+  <!-- ─────────────────────────────── THE PROBLEM ─────────────────────────────── -->
+  <section class="py-24 px-6">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="fu text-white mb-12 text-center" style="font-size:clamp(1.6rem,3vw,2.4rem);">
+        You're not lazy. You're not untalented.<br><span class="accent">You have a feedback loop problem.</span>
+      </h2>
+
+      <div class="space-y-6 fu delay-1">
+        <p>It's 1:47am and you just opened your laptop to work on your outreach two hours ago.</p>
+        <p>You ended up reading a Twitter thread about why cold outreach is dead…</p>
+        <p>Then you stumble across some YouTube video. Josh made $9,000 last month with copywriting. Started around the same time as you.</p>
+        <p>You start to think — <span class="copy-bold">What is actually wrong with me? What does Josh know that I don't know?</span></p>
+        <p>Here's the truth… <span class="copy-bold">nothing is wrong with you.</span></p>
+        <p>Here's what's actually happening:</p>
+        <p><span class="copy-bold">Most beginner copywriters spend months "learning" without getting even 10 real corrections.</span> They repeat the same mistakes for months, write alone, post nowhere, and get no real feedback from anyone who actually knows what gets clients.</p>
+        <p>Just you and ChatGPT telling you it's "great," while you get left on seen by everyone you reached out to.</p>
+        <p>So… you do what feels productive — you open another course, watch another breakdown, and take more notes.</p>
+        <p>And you know deep down that it feels like progress… but nothing is moving.</p>
+        <p>Then, you're back in consuming mode and not executing… and the loop continues.</p>
+      </div>
+
+      <div class="divider my-10"></div>
+
+      <div class="space-y-6 fu delay-2">
+        <p>I also struggled with this loop when I started copywriting.</p>
+        <p>To escape this loop I had to bleed my money.</p>
+        <p><span class="copy-bold">I had to spend $14,000 going through every course, every program, every coaching offer</span> to extract what actually works.</p>
+      </div>
+
+      <div class="stat-box my-8 fu delay-2">
+        <div class="space-y-3">
+          <div class="flex items-center gap-3"><span class="accent font-bold text-lg" style="font-family:'Outfit',sans-serif;">→</span> <span class="copy-bold">Got my first client in 9 days of outreach</span></div>
+          <div class="flex items-center gap-3"><span class="accent font-bold text-lg" style="font-family:'Outfit',sans-serif;">→</span> <span class="copy-bold">Reached $10K/month in 5 months</span></div>
+          <div class="flex items-center gap-3"><span class="accent font-bold text-lg" style="font-family:'Outfit',sans-serif;">→</span> <span class="copy-bold">Now doing $25k – $30k/month</span></div>
+        </div>
+        <p class="mt-6" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,2.5vw,2rem);letter-spacing:0.04em;line-height:1.2;color:#fff;text-align:center;">I achieved all of this not because of talent — <span class="accent">but because of systems and mentors with real feedback behind it.</span></p>
+      </div>
+
+      <div class="space-y-6 fu delay-3">
+        <p>Outside, there are <span class="copy-bold">47 different "right ways" to become a copywriter.</span></p>
+        <p>Conflicting frameworks. Recycled guru advice. Old tactics dressed up as secrets.</p>
+        <p>But keeping everything aside — the truth is:</p>
+        <p><span class="copy-bold">You aren't a bad copywriter… and you aren't lazy or undisciplined.</span></p>
+        <p style="font-size:1.15rem;color:#fff;font-family:'Outfit',sans-serif;font-weight:700;line-height:1.5;margin-top:1.5rem;">The problem is — you've been guessing at every line… and nobody's been telling you what you're doing wrong so you can fix it.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider max-w-5xl mx-auto"></div>
+
+  <!-- ─────────────────────────────── THE SHIFT ─────────────────────────────── -->
+  <section class="py-24 px-6" style="background:linear-gradient(180deg,#000 0%,#070410 50%,#000 100%);">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="fu text-white mb-8" style="font-size:clamp(1.6rem,3vw,2.4rem);border-left:3px solid var(--accent);padding-left:1.25rem;">
+        The only thing that fixes a broken feedback loop is a better loop.
+      </h2>
+      <div class="space-y-6 fu delay-1">
+        <p>You have a broken feedback loop problem. The only thing that can fix this is a better loop.</p>
+        <p>An environment where you have experts reviewing your outreach, your copy before it goes out. A roadmap that works for you.</p>
+        <p>Inside this isn't another PDF, another YouTube video, and it isn't a $997 course from someone who hasn't written copy for a real client in years.</p>
+        <p><span class="copy-bold">The copywriters who are landing clients fast aren't smarter than you… they're just not doing it alone.</span></p>
+        <p>They have someone reviewing their outreach, their copy before it goes out and a roadmap made for them. People a few steps ahead sharing exactly what's working right now.</p>
+        <p style="color:#fff;font-family:'Outfit',sans-serif;font-weight:700;font-size:1.1rem;line-height:1.5;">That's the reason I built MP Academy — so you don't have to bleed $14,000 and 7 months to figure it out.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider max-w-5xl mx-auto"></div>
+
+  <!-- ─────────────────────────────── WHAT HAPPENS INSIDE ─────────────────────────────── -->
+  <section class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="fu text-white" style="font-size:clamp(1.8rem,3.5vw,2.8rem);">
+          Here's what you get inside MP Academy. <span class="accent">Free.</span>
+        </h2>
+      </div>
+
+      <!-- Feature 1: Cash Prizes -->
+      <div class="feature-card mb-6 fu">
+        <div class="grid" style="grid-template-columns:2fr 3fr;">
+          <div class="p-7 md:p-9 flex flex-col justify-center order-2 md:order-1">
+            <h3 class="text-white mb-4" style="font-size:2.2rem;">Monthly Cash Prize <span class="accent">Challenges</span></h3>
+            <p>Every month there's a challenge running with real money on the line. Most outreach sent. Most replies. Most calls booked.</p>
+            <p class="mt-4">You get paid to do the exact work you should be doing anyway. <span class="copy-bold">Nothing sharpens your skills faster than the despair of losing a game you might have won.</span></p>
+          </div>
+          <div class="feature-img-fill order-1 md:order-2">
+            <img src="brand_assets/Active Community Screenshot.png" alt="Active community" onclick="openLightbox(this.src)">
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2: Live Calls -->
+      <div class="feature-card mb-6 fu delay-1">
+        <div class="grid" style="grid-template-columns:3fr 2fr;">
+          <div class="feature-img-fill">
+            <img src="brand_assets/Discord Group Calls.png" alt="Live group coaching call" onclick="openLightbox(this.src)">
+          </div>
+          <div class="p-7 md:p-9 flex flex-col justify-center">
+            <h3 class="text-white mb-4" style="font-size:2.2rem;">Live Monthly Calls <span class="accent">(That Nobody Leaves)</span></h3>
+            <p>Scheduled for 90 minutes. Runs 4–5 hours because the questions never stop and nobody wants to log off.</p>
+            <p class="mt-4"><span class="copy-bold">No motivational filler</span> — just raw, unfiltered, line-by-line sauce on copy, outreach, sales calls, and everything it takes to land your 1st client.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3: Copy Reviews -->
+      <div class="feature-card mb-6 fu delay-2">
+        <div class="grid" style="grid-template-columns:2fr 3fr;">
+          <div class="p-7 md:p-9 flex flex-col justify-center order-2 md:order-1">
+            <h3 class="text-white mb-4" style="font-size:2.2rem;">Expert Copy <span class="accent">&amp; Outreach Reviews</span></h3>
+            <p>Submit your copy or outreach and get it <span class="copy-bold">torn apart by someone who actually knows what they're looking at.</span></p>
+            <p class="mt-4">You get a rating, what's working, what's killing your results, and exact line-by-line steps to fix it. Not "good job keep going." Real feedback that makes your next draft 10x sharper.</p>
+          </div>
+          <div class="feature-img-fill order-1 md:order-2">
+            <img src="brand_assets/Copy Reviews by Anam.png" alt="Expert copy reviews" onclick="openLightbox(this.src)">
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 4: Community -->
+      <div class="feature-card mb-6 fu delay-3">
+        <div class="grid" style="grid-template-columns:3fr 2fr;">
+          <div class="feature-img-fill">
+            <img src="brand_assets/Free Discord (Outreach Channel).png" alt="Active Discord community" onclick="openLightbox(this.src)">
+          </div>
+          <div class="p-7 md:p-9 flex flex-col justify-center">
+            <h3 class="text-white mb-4" style="font-size:2.2rem;">A Community That <span class="accent">Actually Gets It</span></h3>
+            <p>No lurking in silence while gurus flex their $50k/mo. These are people <span class="copy-bold">in the exact same position as you</span> — grinding, learning, posting wins, sharing what's working.</p>
+            <p class="mt-4">Rashid landed his first client without outreach because he was in this room. You don't know which conversation changes everything for you until it does.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 5: Roadmap -->
+      <div class="feature-card fu delay-4">
+        <div class="grid" style="grid-template-columns:2fr 3fr;">
+          <div class="p-7 md:p-9 flex flex-col justify-center order-2 md:order-1">
+            <h3 class="text-white mb-4" style="font-size:2.2rem;">The 45-Day <span class="accent">Beginner Roadmap</span></h3>
+            <p><span class="copy-bold">Wake up every morning knowing exactly what to do next.</span> Tasks for every day for 45 days. Day by day you'll feel gaining real momentum.</p>
+            <p class="mt-4">By the end, you won't just have learned copywriting — you'll have done it. And if you follow every step correctly, you will have landed your first client before day 45 is up.</p>
+          </div>
+          <div class="feature-img-fill order-1 md:order-2">
+            <img src="brand_assets/30 day roadmap.png" alt="45-day beginner roadmap" onclick="openLightbox(this.src)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider max-w-5xl mx-auto"></div>
+
+  <!-- ─────────────────────────────── THE SYSTEM ─────────────────────────────── -->
+  <section class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="max-w-2xl mb-16 mx-auto">
+        <h2 class="fu text-white mb-6 text-center" style="font-size:clamp(1.8rem,3.5vw,2.8rem);">
+          Stop winging it.<br><span class="accent">Follow the roadmap.</span>
+        </h2>
+        <div class="space-y-5 fu delay-1">
+          <p>No more waking up and staring at the ceiling wondering what to do today.</p>
+          <p>No more switching strategies mid-week.</p>
+          <p>No more deciding between 47 different methods at 11pm when you should be executing.</p>
+          <p class="copy-bold" style="color:#fff;">The 45-day roadmap gives you one clear task per day — and you'll get your first client.</p>
+        </div>
+      </div>
+
+      <!-- Phase cards — vertical timeline -->
+      <div class="roadmap-timeline">
+        <div class="phase-card fu">
+          <div class="phase-day">Days 1–10</div>
+          <h3 class="text-white mb-2" style="font-size:1.3rem;">Foundation</h3>
+          <p style="font-size:0.95rem;">Set up your offer, learn the core frameworks, and write your first practice copy. By day 10 you'll have something real to show.</p>
+        </div>
+        <div class="roadmap-connector">
+          <div class="roadmap-line"></div>
+          <div class="roadmap-arrow">↓</div>
+          <div class="roadmap-line"></div>
+        </div>
+        <div class="phase-card fu delay-1">
+          <div class="phase-day">Days 11–25</div>
+          <h3 class="text-white mb-2" style="font-size:1.3rem;">Outreach</h3>
+          <p style="font-size:0.95rem;">Build your prospect list, write and send cold outreach, get your first replies. The feedback loop starts here.</p>
+        </div>
+        <div class="roadmap-connector">
+          <div class="roadmap-line"></div>
+          <div class="roadmap-arrow">↓</div>
+          <div class="roadmap-line"></div>
+        </div>
+        <div class="phase-card fu delay-2">
+          <div class="phase-day">Days 26–40</div>
+          <h3 class="text-white mb-2" style="font-size:1.3rem;">Closing</h3>
+          <p style="font-size:0.95rem;">Follow up, book discovery calls, handle objections, and present your offer. This is where most beginners drop the ball — you won't.</p>
+        </div>
+        <div class="roadmap-connector">
+          <div class="roadmap-line"></div>
+          <div class="roadmap-arrow">↓</div>
+          <div class="roadmap-line"></div>
+        </div>
+        <div class="phase-card fu delay-3">
+          <div class="phase-day">Days 41–45</div>
+          <h3 class="text-white mb-2" style="font-size:1.3rem;">Land the Client</h3>
+          <p style="font-size:0.95rem;">Finalize onboarding, collect payment, start strong. Your first client — earned through a system that works.</p>
+        </div>
+      </div>
+
+      <!-- Arrow from last phase card to Full Roadmap heading -->
+      <div class="roadmap-connector fu delay-4" style="margin:0 auto;">
+        <div class="roadmap-line"></div>
+        <div class="roadmap-arrow">↓</div>
+        <div class="roadmap-line"></div>
+      </div>
+
+      <!-- Full roadmap — heading + arrow connector + image -->
+      <div class="fu delay-4 text-center mb-2">
+        <h3 class="text-white" style="font-size:clamp(2rem,3.5vw,2.8rem);">The Full <span class="accent">Roadmap</span></h3>
+      </div>
+      <div class="roadmap-connector fu delay-4" style="margin:0.5rem auto;">
+        <div class="roadmap-line"></div>
+        <div class="roadmap-arrow">↓</div>
+        <div class="roadmap-line"></div>
+      </div>
+      <div class="fu delay-4 relative rounded-2xl overflow-hidden cursor-zoom-in" style="border:1px solid rgba(197,87,255,0.2);box-shadow:0 0 60px rgba(197,87,255,0.07);" onclick="openLightbox('brand_assets/30 day roadmap full page.png')">
+        <img src="brand_assets/30 day roadmap full page.png" alt="Full 45-day roadmap" class="w-full" style="display:block;">
+      </div>
+
+      <p class="fu mt-8 text-center" style="font-size:1.1rem;color:#fff;font-family:'Outfit',sans-serif;font-weight:700;line-height:1.5;">
+        By the end, you won't just have learned copywriting — <span class="accent">you'll have done it.</span>
+      </p>
+    </div>
+  </section>
+
+  <div class="divider max-w-5xl mx-auto"></div>
+
+  <!-- ─────────────────────────────── SOCIAL PROOF ─────────────────────────────── -->
+  <section class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="max-w-2xl mb-14">
+        <h2 class="fu text-white mb-6" style="font-size:clamp(1.6rem,3vw,2.4rem);">
+          "I've joined Discord servers before…<br><span class="accent">and they were useless."</span>
+        </h2>
+        <div class="space-y-5 fu delay-1">
+          <p>I know.</p>
+          <p>Most servers are graveyards. You join, scroll through a few messages, post nothing, and leave feeling more alone than before.</p>
+          <p class="copy-bold" style="color:#fff;">This one is actually different… and not because we say it is.</p>
+          <p>Just take it from the people who have joined:</p>
+        </div>
+      </div>
+
+      <!-- Testimonial marquee — 2 rows, auto-scrolling, pauses on hover -->
+      <div class="testimonials-marquee-outer mb-10 fu">
+        <!-- Row 1 -->
+        <div class="testimonials-track">
+          <img src="brand_assets/review 1.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 3.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 5.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 7.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 1.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 3.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 5.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 7.png" alt="Member review" onclick="openLightbox(this.src)">
+        </div>
+        <!-- Row 2 (slightly different speed) -->
+        <div class="testimonials-track testimonials-track-r2">
+          <img src="brand_assets/review 2.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 4.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 6.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 8.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 2.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 4.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 6.png" alt="Member review" onclick="openLightbox(this.src)">
+          <img src="brand_assets/review 8.png" alt="Member review" onclick="openLightbox(this.src)">
+        </div>
+      </div>
+
+      <!-- Wins heading -->
+      <h3 class="fu text-white mb-6" style="font-size:clamp(1.5rem,2.5vw,2.2rem);">Real wins from inside the <span class="accent">community</span></h3>
+
+      <!-- Outreach wins strip — consistent height, grouped by type -->
+      <div class="wins-strip fu delay-1">
+        <img src="Outreach Wins/payment-100-succeeded.png" alt="Payment success" onclick="openLightbox(this.src)">
+        <img src="Outreach Wins/sales-4234-eur.png" alt="Sales win" onclick="openLightbox(this.src)">
+        <img src="Outreach Wins/paypal-141-balance.png" alt="PayPal earnings" onclick="openLightbox(this.src)">
+        <img src="Outreach Wins/reply-youve-got-talent.png" alt="Reply win" onclick="openLightbox(this.src)">
+        <img src="Outreach Wins/reply-asking-prices.png" alt="Reply asking prices" onclick="openLightbox(this.src)">
+        <img src="Outreach Wins/arthur-call-accepted.png" alt="Call accepted" onclick="openLightbox(this.src)">
+        <img src="Outreach Wins/calendly-elliot-booked.png" alt="Call booked" onclick="openLightbox(this.src)">
+        <img src="Outreach Wins/krish-strategy-call.png" alt="Strategy call booked" onclick="openLightbox(this.src)">
+      </div>
+
+      <div class="mt-14 fu">
+        <div class="stat-box">
+          <p style="color:#fff;font-size:1.05rem;line-height:1.75;">People are paying $500, $1,000, $2,000 for courses that give them a fraction of this with zero feedback, zero community, and zero accountability.</p>
+          <p class="mt-3" style="color:var(--accent);font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;">You're getting all of it. Free. Because your first barrier shouldn't be $997.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider max-w-5xl mx-auto"></div>
+
+  <!-- ─────────────────────────────── FINAL CTA ─────────────────────────────── -->
+  <section class="py-28 px-6 relative overflow-hidden">
+    <div class="glow-bg" style="width:700px;height:700px;background:radial-gradient(circle, rgba(197,87,255,0.13) 0%, transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+
+    <div class="max-w-4xl mx-auto text-center relative">
+      <h2 class="fu text-white mb-6" style="font-size:clamp(2rem,4.5vw,3.2rem);">
+        You need one win.<br><span class="accent">Just one.</span>
+      </h2>
+      <p class="fu delay-1 mx-auto mb-12" style="max-width:580px;font-size:1.05rem;line-height:1.8;color:#ADADBD;">
+        Just 1 client… your first $1,000 made… enough to prove to yourself that this is real, that you're not the problem, that this time actually is different.
+        <br><br>
+        <span style="color:#fff;font-weight:600;">That's what MP Academy is designed to give you.</span>
+      </p>
+
+      <!-- Worst / Best case -->
+      <div class="grid md:grid-cols-2 gap-4 mb-14 text-left fu delay-2">
+        <div class="feature-card p-7">
+          <h3 class="mb-4" style="font-size:1.4rem;color:#888;">Worst Case Scenario</h3>
+          <p>You join, look around, decide it's not for you, and leave. You've lost <span class="copy-bold">nothing</span> — not a single dollar. And not an hour you weren't already spending on YouTube.</p>
+        </div>
+        <div class="best-case-card">
+          <h3 class="mb-4" style="font-size:1.4rem;color:var(--accent);">Best Case Scenario</h3>
+          <p>You follow the roadmap. You get your copy reviewed. You show up to a call. And you finally are making real progress.</p>
+          <p class="mt-4" style="color:#fff;font-family:'Outfit',sans-serif;font-weight:700;line-height:1.5;">And it hits you…<br>You weren't bad at this. You just never had a feedback loop that actually worked.</p>
+        </div>
+      </div>
+
+      <div class="fu delay-3">
+        <a href="https://discord.gg/UkFj372Egg" class="btn-primary" style="font-size:1.1rem;padding:1.2rem 3rem;">→ Join MP Academy Free</a>
+        <p class="mt-5" style="color:#555;font-size:0.9rem;">Free forever. No credit card. No catch.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider max-w-5xl mx-auto"></div>
+
+  <!-- ─────────────────────────────── FAQ ─────────────────────────────── -->
+  <section class="py-24 px-6">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="fu text-white mb-10" style="font-size:clamp(1.6rem,3vw,2.2rem);">
+        Questions people ask before joining
+      </h2>
+      <div class="fu delay-1" id="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span>"Is this just a free funnel to sell me a $997 course later?"</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Simple answer: you make $1,000 with this advice, you'll come back ready to invest in the next level. That's the whole model. No hidden pitch. No bait and switch.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span>"Will it actually be active, or dead after a week?"</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>The calls run 4–5 hours because nobody wants to leave. The roadmap gives everyone a daily task so there's always a reason to show up. Dead servers have neither.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span>"Are the people reviewing copy actually good, or just other beginners?"</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>The reviews come from people who've been through the full system and landed clients. Not random members giving vibes-based feedback. Line-by-line, with a rating.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span>"I'm a complete beginner. Is this too advanced for me?"</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>This was built for you specifically. Not for people scaling past $5k/month. For the person who doesn't have their first client yet and needs someone to point at day 1 and say "start here."</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span>"I don't have time. I have school and a job."</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>The roadmap is built around daily tasks — not 6-hour study sessions. If you have 2–3 hours a day, you have enough. Everyone inside has shifts, classes, and responsibilities. They're moving anyway.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span>"What if I join and fall off like every other time?"</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>You've fallen off before because you were alone, had no feedback, and had no clear next step. All three of those are gone the moment you join. The loop breaks when the environment changes.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span>"Copywriting is a dying industry. Why would I learn a skill that AI can do?"</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes AI can replace you if you just write emails, or just YT scripts, or just sales pages. AI cannot replace a copywriter who has learnt not just one piece of copy but knows all-round marketing.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FOOTER -->
+  <footer class="py-12 px-6">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <img src="brand_assets/mp society logo + brand colors.png" alt="MP Academy" class="h-8 w-auto opacity-80">
+      <span class="eyebrow" style="font-size:0.75rem;">Free forever</span>
+      <p style="color:#444;font-size:0.85rem;">© 2024 MP Academy. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="if(event.target===this||event.target.id==='lightbox')closeLightbox()">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" onclick="closeLightbox()">✕ Close</button>
+      <img id="lightbox-img" src="" alt="Preview">
+    </div>
+  </div>
+
+  <script>
+    // Lightbox
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // FAQ
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // Scroll fade-up
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('vis');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.fu').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+node_modules/
+temporary screenshots/
+screenshots/
+ss_*.png
+screenshot-sections.mjs
+screenshot.mjs
+serve.mjs
+package.json
+package-lock.json
+CLAUDE.md
